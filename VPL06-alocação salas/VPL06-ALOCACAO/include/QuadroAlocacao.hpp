@@ -5,15 +5,14 @@
 using namespace std;
 class Quadro_Alocacao{
 private:
-map<string,string> alocacoes_disciplinas;
+map<string,Disciplina> _alocacoes_disciplinas;
 
 public:
 
-map<string,string> alocacoes_disciplinas;
 void inserir_alocacao(string codigo, string nome, string dia, string horario, string sala);
-remover_alocacao_disciplina(string codigo, string horario);
+void remover_alocacao_disciplina(string codigo, string horario);
 vector<Disciplina> recuperar_disciplinas_mais_ofertadas();
-imprimir_alocacao_completa();
+void imprimir_alocacao_completa();
 
 };
 #endif

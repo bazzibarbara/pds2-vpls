@@ -8,9 +8,6 @@ Alocacao::Alocacao(string dia, string horario,string sala){
     _horario=horario;
     _sala=sala;
 }
-void Alocacao::imprimir_dados(){
-    cout<< _dia << _horario << _sala << endl;
-}
 string Alocacao::get_dia(){
     return _dia;
 }
@@ -19,4 +16,7 @@ string Alocacao::get_horario(){
 }
 string Alocacao::get_sala(){
     return _sala;
+}
+void Alocacao::imprimir_dados(){
+    cout<< get_dia() << " " << get_horario() << " " << get_sala() << endl;
 }

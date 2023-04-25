@@ -10,48 +10,45 @@ Disciplina:: Disciplina(string codigo, string nome){
     _codigo=codigo;
     _nome=nome;
 }
-
-void Disciplina::inserir_alocacao(string dia, string horario, string sala ){
-    Alocacao a = Alocacao(dia,horario,sala);
-    _aloc.push_back(a);
-
-}
-void Disciplina::remover_alocacao(string horario){
-    Alocacao horario_removido =Alocacao(0,"",0);
-    for(unsigned i=0; _aloc.size(); i++){
-        if(_aloc.at(i).get_horario()== horario){
-            horario_removido=_aloc.at(i);
-            _aloc.erase(_aloc.begin()+i);
-        }
-        else{
-            cout << "Horario nao existe" << endl;
-            }
-    }
-
-}
 string Disciplina::get_codigo(){
     return _codigo;
 }
-
 string Disciplina::get_nome(){
     return _nome;
 }
-
-vector<Alocacao> Disciplina::get_alocacoes(){
+map<string,Alocacao> Disciplina::get_alocacao(){
     return _aloc;
 }
+int Disciplina::get_size_aloc(){
+    return _aloc.size();
+}
+
+void Disciplina::inserir_alocacao(string dia, string horario, string sala ){
+    Alocacao a = Alocacao(dia,horario,sala);
+    _aloc.insert(pair<string,Alocacao>(horario, a));
+
+}
+void Disciplina::remover_alocacao(string horario){
+    auto it= _aloc.begin();
+    while(it != _aloc.end()){
+        if(horario== it->first){
+            _aloc.erase(it);
+            break;
+        }
+        it= next(it);
+    }
+}
+
 
 
 void Disciplina::imprimir_alocacao(){
-    for(Alocacao _aloc : get_sorted_alocacoes())
-        cout << _codigo << " " << _nome << " " << aloc.get_dia() << " " << aloc.get_horario() << " " << aloc.get_sala() << endl;
+    auto it= _aloc.begin();
+    while(it != _aloc.end()){
+        cout<< _codigo<< " "<< _nome << " ";
+        it-> second.imprimir_dados();
+        it = next(it);
+        cout << _codigo << " " << _nome << " " << it->second.get_dia() << " " << it->second.get_horario() << " " << it -> second.get_sala() << endl;
+
+    }
 }
 
-vector<Alocacao> Disciplina::get_sorted_alocacoes(){
-    vector<Alocacao> alocacoesOrdenadas = _aloc;
-    sort(alocacoesOrdenadas.begin(), alocacoesOrdenadas.end(),
-              [](const Alocacao& a, const Alocacao& b)  { return a.get_horario() < b.get_horario();  
-              });
-
-    return alocacoesOrdenadas;
-}
